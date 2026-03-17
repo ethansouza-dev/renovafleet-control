@@ -1,64 +1,66 @@
 # 🚀 RenovaFleet Control
 
-Plataforma de automação para gestão de renovações de seguros de frotas, com foco em execução crítica às **00:00** para garantir exclusividade nas cotações.
+Plataforma de automação para renovação de seguros de frotas, com execução crítica às 00:00, garantindo exclusividade nas cotações e eficiência operacional.
 
 ---
 
-## 🎯 Problema
+## 💡 Problema
 
-Corretoras perdem oportunidades de cotação por atraso no envio após a meia-noite, comprometendo a competitividade e exclusividade junto às seguradoras.
-
----
-
-## 💡 Solução
-
-O **RenovaFleet Control** automatiza e organiza toda a operação de renovação, garantindo:
-
-* ⏱ Execução precisa às 00:00
-* 📊 Monitoramento em tempo real
-* 🚨 Identificação de críticas operacionais
-* 📩 Registro de comunicação com cliente
-* 🧾 Auditoria completa da operação
+No mercado de seguros, atrasos no envio de cotações podem resultar na perda de exclusividade junto às seguradoras.
 
 ---
 
-## 🧠 Funcionalidades
+## 🎯 Solução
 
-* Dashboard operacional da madrugada
-* Gestão de críticas com motivo e ação recomendada
-* Registro de envio (E-mail / WhatsApp) com protocolo
-* Exportação de relatórios em CSV
-* Controle por corretora (multi-tenant)
-* Preparação por seguradora
+O RenovaFleet Control automatiza e monitora todo o processo de renovação, garantindo:
 
----
-
-## 🛠 Tecnologias
-
-* React + Vite
-* TailwindCSS
-* JavaScript
-* Supabase (em implementação)
+- Execução no horário crítico (00:00)
+- Monitoramento operacional em tempo real
+- Gestão de pendências (críticas)
+- Rastreabilidade completa
+- Registro de comunicação com clientes (E-mail e WhatsApp)
 
 ---
 
-## 📌 Status do Projeto
+## ⚙️ Funcionalidades
 
-🚧 Em desenvolvimento
-🔄 Evoluindo para integração com banco de dados e automação completa
+- Dashboard operacional da madrugada
+- Monitoramento de execuções críticas
+- Gestão de críticas por prioridade
+- Registro de comunicação com cliente
+- Exportação de relatórios
 
 ---
 
-## 🧭 Visão
+## 🖥️ Interface
 
-Transformar um processo manual e sensível em uma operação:
+### Dashboard
+![Dashboard](public/images/dashboard.jpg)
 
-✔ Automatizada
-✔ Rastreável
-✔ Escalável
+### Tela de Login
+![Login](public/images/login.jpg)
+
+---
+
+## 📊 Tecnologias utilizadas
+
+- React.js
+- JavaScript
+- Vite
+- Tailwind CSS
+
+---
+
+## 🚧 Em desenvolvimento
+
+- Integração com Supabase
+- Automação completa do robô
+- Histórico e auditoria operacional
 
 ---
 
 ## 👨‍💻 Autor
 
-**Ethan Souza**
+Projeto idealizado e desenvolvido por **Ethan Souza**
+
+🔗 LinkedIn: www.linkedin.com/in/ethan-souza-658164247
