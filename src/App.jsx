@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import Usuario from "./pages/Usuario";
 import Frota from "./pages/Frota";
+import Seguradoras from "./pages/Seguradoras";
 
 function ProtectedRoute({ children }) {
   const [session, setSession] = useState(undefined);
@@ -80,6 +81,15 @@ export default function App() {
           element={
             <ProtectedRoute>
               <Frota />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/seguradoras"
+          element={
+            <ProtectedRoute>
+              <Seguradoras />
             </ProtectedRoute>
           }
         />

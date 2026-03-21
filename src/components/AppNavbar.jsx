@@ -1,9 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  Menu,
   LayoutDashboard,
   Users,
   Truck,
+  Building2,
   LogOut,
   Moon,
   Sun,
@@ -14,13 +14,6 @@ import { supabase } from "../lib/supabase";
 
 import { Button } from "@/components/ui/button";
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -28,23 +21,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Separator } from "@/components/ui/separator";
 
-const navItems = [
+const desktopNavItems = [
   {
     label: "Dashboard",
     to: "/dashboard",
     icon: LayoutDashboard,
-  },
-  {
-    label: "Usuário",
-    to: "/usuario",
-    icon: Users,
-  },
-  {
-    label: "Frota",
-    to: "/frota",
-    icon: Truck,
   },
 ];
 
@@ -69,19 +51,25 @@ export default function AppNavbar({
       : "Light";
 
   const navClass = isDark
-    ? "border-zinc-800 bg-zinc-950/80 text-zinc-100"
-    : "border-zinc-200 bg-white/85 text-zinc-900";
+    ? "border-zinc-800 bg-zinc-950/90 text-zinc-100"
+    : "border-zinc-200 bg-white/90 text-zinc-900";
 
   const mutedClass = isDark ? "text-zinc-400" : "text-zinc-600";
+
   const activeClass = isDark
     ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/20"
     : "bg-emerald-50 text-emerald-700 border border-emerald-200";
+
   const idleClass = isDark
     ? "hover:bg-zinc-900 text-zinc-300"
     : "hover:bg-zinc-100 text-zinc-700";
 
-  const renderNavLinks = (mobile = false) =>
-    navItems.map((item) => {
+  const accountButtonClass = isDark
+    ? "border-zinc-700 bg-zinc-900 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100"
+    : "border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-100 hover:text-zinc-900";
+
+  const renderDesktopLinks = () =>
+    desktopNavItems.map((item) => {
       const Icon = item.icon;
       const isActive = location.pathname === item.to;
 
@@ -91,7 +79,7 @@ export default function AppNavbar({
           to={item.to}
           className={`flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition ${
             isActive ? activeClass : idleClass
-          } ${mobile ? "w-full" : ""}`}
+          }`}
         >
           <Icon size={16} />
           <span>{item.label}</span>
@@ -104,93 +92,31 @@ export default function AppNavbar({
       className={`sticky top-0 z-40 border-b backdrop-blur supports-[backdrop-filter]:bg-opacity-80 ${navClass}`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-3">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu size={18} />
-              </Button>
-            </SheetTrigger>
+        <Link to="/dashboard" className="flex items-center gap-2">
+          <div
+            className={`flex h-9 w-9 items-center justify-center rounded-xl ${
+              isDark
+                ? "bg-emerald-500/15 text-emerald-300"
+                : "bg-emerald-50 text-emerald-700"
+            }`}
+          >
+            <Shield size={18} />
+          </div>
 
-            <SheetContent side="left" className={isDark ? "bg-zinc-950 text-zinc-100 border-zinc-800" : ""}>
-              <SheetHeader>
-                <SheetTitle className="flex items-center gap-2">
-                  <Shield size={18} />
-                  RenovaFleet Control
-                </SheetTitle>
-              </SheetHeader>
-
-              <div className="mt-6 flex flex-col gap-2">
-                {renderNavLinks(true)}
-                <Separator className="my-3" />
-                <Button
-                  variant="outline"
-                  onClick={onCycleTheme}
-                  className="justify-start gap-2 rounded-xl"
-                >
-                  {themePreference === "dark" ? (
-                    <Moon size={16} />
-                  ) : themePreference === "light" ? (
-                    <Sun size={16} />
-                  ) : (
-                    <MonitorCog size={16} />
-                  )}
-                  Tema: {themeLabel}
-                </Button>
-
-                <Button
-                  variant="destructive"
-                  onClick={handleLogout}
-                  className="justify-start gap-2 rounded-xl"
-                >
-                  <LogOut size={16} />
-                  Sair
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
-
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <div
-              className={`flex h-9 w-9 items-center justify-center rounded-xl ${
-                isDark
-                  ? "bg-emerald-500/15 text-emerald-300"
-                  : "bg-emerald-50 text-emerald-700"
-              }`}
-            >
-              <Shield size={18} />
-            </div>
-
-            <div className="leading-tight">
-              <div className="text-sm font-semibold">RenovaFleet Control</div>
-              <div className={`text-xs ${mutedClass}`}>Painel operacional</div>
-            </div>
-          </Link>
-        </div>
+          <div className="leading-tight">
+            <div className="text-sm font-semibold">RenovaFleet Control</div>
+            <div className={`text-xs ${mutedClass}`}>Painel operacional</div>
+          </div>
+        </Link>
 
         <nav className="hidden items-center gap-2 md:flex">
-          {renderNavLinks()}
+          {renderDesktopLinks()}
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            onClick={onCycleTheme}
-            className="hidden rounded-xl md:inline-flex"
-          >
-            {themePreference === "dark" ? (
-              <Moon size={16} />
-            ) : themePreference === "light" ? (
-              <Sun size={16} />
-            ) : (
-              <MonitorCog size={16} />
-            )}
-            <span className="ml-2">Tema: {themeLabel}</span>
-          </Button>
-
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="rounded-xl">
+              <Button variant="outline" className={`rounded-xl ${accountButtonClass}`}>
                 Conta
               </Button>
             </DropdownMenuTrigger>
@@ -198,19 +124,39 @@ export default function AppNavbar({
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
               <DropdownMenuSeparator />
+
+              <DropdownMenuItem asChild>
+                <Link to="/dashboard" className="flex items-center gap-2">
+                  <LayoutDashboard size={16} />
+                  Dashboard
+                </Link>
+              </DropdownMenuItem>
+
               <DropdownMenuItem asChild>
                 <Link to="/usuario" className="flex items-center gap-2">
                   <Users size={16} />
                   Usuário
                 </Link>
               </DropdownMenuItem>
+
               <DropdownMenuItem asChild>
                 <Link to="/frota" className="flex items-center gap-2">
                   <Truck size={16} />
                   Frota
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={onCycleTheme} className="flex items-center gap-2">
+
+              <DropdownMenuItem asChild>
+                <Link to="/seguradoras" className="flex items-center gap-2">
+                  <Building2 size={16} />
+                  Seguradoras
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem
+                onClick={onCycleTheme}
+                className="flex items-center gap-2"
+              >
                 {themePreference === "dark" ? (
                   <Moon size={16} />
                 ) : themePreference === "light" ? (
@@ -218,9 +164,11 @@ export default function AppNavbar({
                 ) : (
                   <MonitorCog size={16} />
                 )}
-                Alterar tema
+                Alterar tema ({themeLabel})
               </DropdownMenuItem>
+
               <DropdownMenuSeparator />
+
               <DropdownMenuItem
                 onClick={handleLogout}
                 className="flex items-center gap-2 text-red-600 focus:text-red-600"
